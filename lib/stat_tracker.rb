@@ -20,4 +20,8 @@ class StatTracker
     hash
   end
 
+  def best_season(id)
+
+  end
+
 end
