@@ -24,10 +24,13 @@ class StatTrackerTest < MiniTest::Test
 
   def test_highest_total_score
     stattracker1 = StatTracker.new(@locations[:game_teams])
-
     assert_equal 5, stattracker1.highest_total_score
   end
 
+  def test_lowest_total_score
+    stattracker1 = StatTracker.new(@locations[:game_teams])
+    assert_equal 3, stattracker1.lowest_total_score
+  end
 
 
 
