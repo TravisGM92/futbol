@@ -13,6 +13,13 @@ class StatTrackerTest < MiniTest::Test
     assert_equal stat_tracker1.data, expected
   end
 
+  def test_it_can_display_team_name_with_team_ID
+    stat_tracker1 = StatTracker.new('./data/dummy_data.csv')
+
+
+    assert_equal stat_tracker1.team_names_and_ID, 3
+  end
+
 
 
 

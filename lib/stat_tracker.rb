@@ -11,4 +11,5 @@ class StatTracker
     @data = data
   end
 
+
 end
