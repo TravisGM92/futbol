@@ -25,9 +25,10 @@ class StatTrackerTest < MiniTest::Test
     }
 
     stat_tracker = StatTracker.from_csv(locations)
+    expected = {2=>["22", "Seattle Sounders FC", "SEA", "/api/v1/teams/2"]}
 
 
-    assert_equal stat_tracker.team_info(2), 3
+    assert_equal stat_tracker.team_info(2), expected
   end
 
 end
