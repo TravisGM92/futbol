@@ -11,4 +11,8 @@ class StatTracker
     @data = data
   end
 
+  def team_info(id)
+
+  end
+
 end
