@@ -3,10 +3,23 @@
     "coverage": {
       "/Users/travisgm/turing/1module/futbol/lib/stat_tracker.rb": {
         "lines": [
-
+          1,
+          null,
+          1,
+          null,
+          1,
+          1,
+          0,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null,
+          null
         ]
       }
     },
-    "timestamp": 1595028081
+    "timestamp": 1595080667
   }
 }

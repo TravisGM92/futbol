@@ -9,6 +9,3 @@ locations = {
   teams: team_path,
   game_teams: game_teams_path
 }
-
-stat_tracker = StatTracker.from_csv(locations[:games])
-p CSV.parse(File.read(stat_tracker.data), headers: true).by_col[1]
