@@ -9,3 +9,5 @@ locations = {
   teams: team_path,
   game_teams: game_teams_path
 }
+
+stat_tracker = StatTracker.from_csv(locations)

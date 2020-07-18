@@ -14,13 +14,20 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_team_name_with_team_ID
-    stat_tracker1 = StatTracker.new('./data/dummy_data.csv')
+    game_path = './data/games.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams.csv'
+
+    locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+
+    stat_tracker = StatTracker.from_csv(locations)
 
 
-    assert_equal stat_tracker1.team_names_and_ID, 3
+    assert_equal stat_tracker.team_info(2), 3
   end
-
-
-
 
 end
