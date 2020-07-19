@@ -155,8 +155,8 @@ class StatTrackerTest < MiniTest::Test
       game_teams: game_teams_path
     }
     stat_tracker = StatTracker.from_csv(locations)
-    
-    assert_equal 0.49, stat_tracker.win_average(6)
+
+    assert_equal 0.49, stat_tracker.average_win_percentage(6)
 
   end
 
