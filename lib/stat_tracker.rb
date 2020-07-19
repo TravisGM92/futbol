@@ -2,7 +2,7 @@ require 'CSV'
 
 class StatTracker
 
-  attr_reader :data, :seasons, :game_team_rows, :game_rows, :team_rows, :team_cols, :body
+  attr_reader :data, :seasons, :game_team_rows, :game_rows, :body
   def self.from_csv(data)
     StatTracker.new(data)
   end
@@ -14,17 +14,12 @@ class StatTracker
     @seasons = CSV.parse(File.read(@data[:games]), headers: true).map do |col|
       col[1]
     end.uniq.sort!
-    @headers = CSV.parse(File.read(@data[:teams]),
-      headers: false)[0]
     @body = File.read(@data[:teams])
-    @team_cols = CSV.parse(File.read(@data[:teams]), headers: false)
   end
 
   def team_info(id)
     hash = {}
-    csv = CSV.new(@body, :headers => true, :header_converters => :symbol)
-    teams_hash = csv.to_a.map{ |row| row.to_hash}
-    teams_hash.find{ |hash| hash[:team_id] == "#{id}"}
+    CSV.new(@body, :headers => true).to_a.map{ |row| row.to_hash}.find{ |hash| hash["team_id"] == "#{id}"}
   end
 
   def best_season(id)

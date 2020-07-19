@@ -29,8 +29,7 @@ class StatTrackerTest < MiniTest::Test
     }
 
     stat_tracker = StatTracker.from_csv(locations)
-    expected = {:team_id=>"2", :franchiseid=>"22", :teamname=>"Seattle Sounders FC", :abbreviation=>"SEA", :stadium=>"Centruy Link Field", :link=>"/api/v1/teams/2"}
-
+    expected = {"team_id"=>"2", "franchiseId"=>"22", "teamName"=>"Seattle Sounders FC", "abbreviation"=>"SEA", "Stadium"=>"Centruy Link Field", "link"=>"/api/v1/teams/2"}
     assert_equal stat_tracker.team_info(2), expected
   end
 
