@@ -129,7 +129,7 @@ class StatTrackerTest < MiniTest::Test
     assert_equal "20172018", stat_tracker.best_season(12)
   end
 
-  def test_it_can_display_worst_season
+  def test_it_can_display_worst_season_20142015
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -142,6 +142,81 @@ class StatTrackerTest < MiniTest::Test
     stat_tracker = StatTracker.from_csv(locations)
 
     assert_equal "20142015", stat_tracker.worst_season(6)
+  end
+
+  def test_it_can_display_worst_season_20122013
+    game_path = './data/games.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams.csv'
+
+    locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+
+    assert_equal "20122013", stat_tracker.worst_season(11)
+  end
+
+  def test_it_can_display_worst_season_20132014
+    game_path = './data/games.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams.csv'
+
+    locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+
+    assert_equal "20132014", stat_tracker.worst_season(13)
+  end
+
+  def test_it_can_display_worst_season_20152016
+    game_path = './data/games.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams.csv'
+
+    locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+
+    assert_equal "20152016", stat_tracker.worst_season(19)
+  end
+
+  def test_it_can_display_worst_season_20162017
+    game_path = './data/games.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams.csv'
+
+    locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+
+    assert_equal "20162017", stat_tracker.worst_season(21)
+  end
+
+  def test_it_can_display_worst_season_20172018
+    game_path = './data/games.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams.csv'
+
+    locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+
+    assert_equal "20172018", stat_tracker.worst_season(54)
   end
 
   def test_it_can_calculate_win_percentage
