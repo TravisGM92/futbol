@@ -9,23 +9,14 @@ class StatTracker
 
   def initialize(data)
     @data = data
-  end
-
-  def game_teams_file
-    CSV.parse(File.read(@data[:game_teams]), headers: true, header_converters: :symbol, converters: :numeric).by_row
-  end
-
-  def teams_file
-    CSV.parse(File.read(@data[:teams]), headers: true, header_converters: :symbol, conversters: :numeric).by_row
-  end
-
-  def games_file
-    CSV.parse(File.read(@data[:games]), headers: true, header_converters: :symbol, conversters: :numeric).by_row
+    @game_teams_file = CSV.parse(File.read(@data[:game_teams]), headers: true, converters: :numeric).by_row
+    @teams_file = CSV.parse(File.read(@data[:teams]), headers: true).by_row
+    @games_file = CSV.parse(File.read(@data[:games]), headers: true, header_converters: :symbol, converters: :numeric).by_row
   end
 
   def goals_by_game_id
     result = Hash.new{|hash,key| hash[key] = []}
-    game_teams_file.each do |game|
+    @game_teams_file.each do |game|
       result[game[0]] << game[6]
     end
     result
@@ -45,18 +36,35 @@ class StatTracker
     game_total_score.values.min
   end
 
-  def build_team_hash
-    teams_file.reduce(Hash.new) do |collector, team|
-      team.each do |id|
-        collector[team_data[0]] << team_data[2]
-      end
-      collector
-    end
+  def find_team_id(team)
+    results = @teams_file.find {|row| row[2] == team}
+    results[0]
   end
 
-##### Have to break out by key in Self
+
+
+  def count_home_games(team)
+    home_games = []
+    team_id = find_team_id(team).to_i
+    @game_teams_file.each do |game|
+      if team_id == game[1].to_i && game[2].to_s == 'home'
+        home_games << game
+      end
+    end
+    count_home_wins(home_games)
+  end
+
+  def count_home_wins(home_games)
+    home_wins = []
+    home_games.each do |game|
+      home_wins << game if game[3].to_s == 'WIN'
+    end
+    home_wins
+    ((home_wins.count.to_f/home_games.count.to_f)*100).round(2)
+  end
+
   def percentage_home_wins(team)
-    data_by_row = CSV.parse(File.read(self.data), headers: true).by_row
+    count_home_games(team)
   end
 
 end

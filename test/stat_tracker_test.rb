@@ -34,10 +34,21 @@ class StatTrackerTest < MiniTest::Test
 
   def test_percentage_home_wins
     stattracker1 = StatTracker.new(@locations)
-    assert_equal = 80.00, stattracker1.percentage_home_wins('FC Dallas')
+    assert_equal = 66.67, stattracker1.percentage_home_wins('FC Dallas')
   end
 
-
+  #
+  # game_path = './data/games_sample.csv'
+  # team_path = './data/teams_sample.csv'
+  # game_teams_path = './data/game_teams_sample.csv'
+  #
+  # @locations = {
+  #   games: game_path,
+  #   teams: team_path,
+  #   game_teams: game_teams_path
+  # }
+  # stattracker1 = StatTracker.new(@locations)
+  # puts stattracker1.percentage_home_wins('FC Dallas')
 
 
 end
