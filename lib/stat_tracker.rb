@@ -2,7 +2,13 @@ require 'CSV'
 
 class StatTracker
 
-  attr_reader :data, :seasons, :game_team_rows, :game_rows, :body, :all_seasons_results2, :all_seasons_results1
+  attr_reader :data, :seasons,
+              :game_team_rows,
+              :game_rows, :body,
+              :all_seasons_results2,
+              :all_seasons_results1,
+              :games_won, :games_lost
+              
   def self.from_csv(data)
     StatTracker.new(data)
   end
@@ -17,6 +23,8 @@ class StatTracker
     @body = File.read(@data[:teams])
     @all_seasons_results2 = all_seasons_results2
     @all_seasons_results1 = all_seasons_results1
+    @games_won = games_won
+    @games_lost = games_lost
   end
 
   def team_info(id)
@@ -29,8 +37,8 @@ class StatTracker
   end
 
   def best_season(id)
-    games_won = self.games_played(id).select{ |row| row[3] == "WIN"}.map{ |row| row[0]}
-    games_won_games = games_won.map{ |games| @game_rows.select{ |row| row[0] == games}}.map{ |game| game.flatten}
+    @games_won = self.games_played(id).select{ |row| row[3] == "WIN"}.map{ |row| row[0]}
+    games_won_games = @games_won.map{ |games| @game_rows.select{ |row| row[0] == games}}.map{ |game| game.flatten}
     @all_seasons_results1 = [games_won_games.select{ |row| row[1] == "20122013"}.length,
     games_won_games.select{ |row| row[1] == "20132014"}.length,
     games_won_games.select{ |row| row[1] == "20142015"}.length,
@@ -53,8 +61,8 @@ class StatTracker
     end
 
     def worst_season(id)
-      games_lost = self.games_played(id).select{ |row| row[3] == "LOSS" || row[3] == "TIE"}.map{ |row| row[0]}
-      games_lost_games = games_lost.map{ |games| @game_rows.select{ |row| row[0] == games}}.map{ |game| game.flatten}
+      @games_lost = self.games_played(id).select{ |row| row[3] == "LOSS" || row[3] == "TIE"}.map{ |row| row[0]}
+      games_lost_games = @games_lost.map{ |games| @game_rows.select{ |row| row[0] == games}}.map{ |game| game.flatten}
       @all_seasons_results2 = [games_lost_games.select{ |row| row[1] == "20122013"}.length,
       games_lost_games.select{ |row| row[1] == "20132014"}.length,
       games_lost_games.select{ |row| row[1] == "20142015"}.length,
@@ -76,17 +84,4 @@ class StatTracker
         "20172018"
       end
     end
-
 end
-
-# game_path = './data/games.csv'
-# team_path = './data/teams.csv'
-# game_teams_path = './data/game_teams.csv'
-#
-# locations = {
-#   games: game_path,
-#   teams: team_path,
-#   game_teams: game_teams_path
-# }
-# stat_tracker = StatTracker.from_csv(locations)
-# p stat_tracker.worst_season(6)
