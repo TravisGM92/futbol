@@ -51,4 +51,42 @@ class StatTracker
         "20172018"
       end
     end
+
+    def worst_season(id)
+      games_lost = self.games_played(id).select{ |row| row[3] == "LOSS" || row[3] == "TIE"}.map{ |row| row[0]}
+      games_lost_games = games_lost.map{ |games| @game_rows.select{ |row| row[0] == games}}.map{ |game| game.flatten}
+      @all_seasons_results2 = [games_lost_games.select{ |row| row[1] == "20122013"}.length,
+      games_lost_games.select{ |row| row[1] == "20132014"}.length,
+      games_lost_games.select{ |row| row[1] == "20142015"}.length,
+      games_lost_games.select{ |row| row[1] == "20152016"}.length,
+      games_lost_games.select{ |row| row[1] == "20162017"}.length,
+      games_lost_games.select{ |row| row[1] == "20172018"}.length]
+      self.best_season(id)
+      if all_seasons_results2[0] == all_seasons_results2.sort[-1]
+        "20122013"
+      elsif all_seasons_results2[1] == all_seasons_results2.sort[-1]
+        "20132014"
+      elsif all_seasons_results2[2] == all_seasons_results2.sort[-1]
+        "20142015"
+      elsif all_seasons_results2[3] == all_seasons_results2.sort[-1]
+        "20152016"
+      elsif all_seasons_results2[4] == all_seasons_results2.sort[-1]
+        "20162017"
+      elsif all_seasons_results2[5] == all_seasons_results2.sort[-1]
+        "20172018"
+      end
+    end
+
 end
+
+# game_path = './data/games.csv'
+# team_path = './data/teams.csv'
+# game_teams_path = './data/game_teams.csv'
+#
+# locations = {
+#   games: game_path,
+#   teams: team_path,
+#   game_teams: game_teams_path
+# }
+# stat_tracker = StatTracker.from_csv(locations)
+# p stat_tracker.worst_season(6)
