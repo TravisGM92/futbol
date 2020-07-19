@@ -2,7 +2,7 @@ require 'CSV'
 
 class StatTracker
 
-  attr_reader :data, :seasons, :game_team_rows, :game_rows, :body
+  attr_reader :data, :seasons, :game_team_rows, :game_rows, :body, :all_seasons_results
   def self.from_csv(data)
     StatTracker.new(data)
   end
@@ -15,6 +15,7 @@ class StatTracker
       col[1]
     end.uniq.sort!
     @body = File.read(@data[:teams])
+    @all_seasons_results = all_seasons_results
   end
 
   def team_info(id)
@@ -25,8 +26,8 @@ class StatTracker
   def best_season(id)
     games_played = @game_team_rows.select{ |row| row[1] == "#{id}"}
     games_won = games_played.select{ |row| row[3] == "WIN"}.map{ |row| row[0]}
-    games_won_games = games_won.map{ |x| @game_rows.select{ |row| row[0] == x}}.map{ |x| x.flatten}
-    all_seasons_results = [games_won_games.select{ |row| row[1] == "20122013"}.length,
+    games_won_games = games_won.map{ |games| @game_rows.select{ |row| row[0] == games}}.map{ |game| game.flatten}
+    @all_seasons_results = [games_won_games.select{ |row| row[1] == "20122013"}.length,
     games_won_games.select{ |row| row[1] == "20132014"}.length,
     games_won_games.select{ |row| row[1] == "20142015"}.length,
     games_won_games.select{ |row| row[1] == "20152016"}.length,
