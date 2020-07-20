@@ -104,6 +104,12 @@ class StatTracker
         end.flatten.sort.max.to_i
     end
 
+    def fewest_goals_scored(id)
+
+    end
+
+
+
 end
 
 # game_path = './data/games.csv'
