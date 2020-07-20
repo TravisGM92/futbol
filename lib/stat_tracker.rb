@@ -91,4 +91,29 @@ class StatTracker
          |w,l| w.to_f/(w.to_f+l.to_f)end.sum/(@all_seasons_results1.zip(@all_seasons_results2).map do
             |w,l| w.to_f/(w.to_f+l.to_f)end.length)).round(2)
     end
+
+    def most_goals_scored(id)
+      goals = []
+      games = @game_rows.select{ |col| col[4] == "#{id}" || col[5] == "#{id}"}
+      games.map do |row|
+        if row[4] == "#{id}"
+          goals << row[6]
+        elsif row[5] == "#{id}"
+          goals << row[7]
+          end
+        end.flatten.sort.max
+    end
+
 end
+
+# game_path = './data/games.csv'
+# team_path = './data/teams.csv'
+# game_teams_path = './data/game_teams.csv'
+#
+# locations = {
+#   games: game_path,
+#   teams: team_path,
+#   game_teams: game_teams_path
+# }
+# stat_tracker = StatTracker.from_csv(locations)
+# p stat_tracker.most_goals_scored(18)
