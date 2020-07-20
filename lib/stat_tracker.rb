@@ -9,7 +9,7 @@ class StatTracker
               :all_seasons_results1,
               :games_won, :games_lost,
               :max_goals, :games_won_games,
-              :body1
+              :body1, :all_games
 
   def self.from_csv(data)
     StatTracker.new(data)
@@ -31,6 +31,7 @@ class StatTracker
     @games_lost = games_lost
     @max_goals = max_goals
     @games_won_games = games_won_games
+    @all_games = all_games
   end
 
   def team_info(id)
@@ -117,7 +118,7 @@ class StatTracker
     end
 
     def favorite_opponent(id)
-      all_games = @game_rows.map do |rows|
+      @all_games = @game_rows.map do |rows|
         index = rows.find_index("#{id}")
         if index == 4
           if rows[7] > rows[6]
@@ -133,4 +134,4 @@ class StatTracker
       team_id = all_games.min_by { |v| freq[v] }
       @body1.select{ |rows| rows[0] == team_id}.flatten[2]
     end
-  end
+end

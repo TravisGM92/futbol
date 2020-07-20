@@ -296,6 +296,20 @@ class StatTrackerTest < MiniTest::Test
     assert_equal "DC United", stat_tracker.favorite_opponent(18)
   end
 
+  def test_it_can_display_rival
+    game_path = './data/games.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams.csv'
+
+    locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+
+    assert_equal "Huston Dash", stat_tracker.rival(18)
+
 
 
 end
