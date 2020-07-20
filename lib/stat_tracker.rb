@@ -7,7 +7,8 @@ class StatTracker
               :game_rows, :body,
               :all_seasons_results2,
               :all_seasons_results1,
-              :games_won, :games_lost
+              :games_won, :games_lost,
+              :max_goals
 
   def self.from_csv(data)
     StatTracker.new(data)
@@ -25,6 +26,7 @@ class StatTracker
     @all_seasons_results1 = all_seasons_results1
     @games_won = games_won
     @games_lost = games_lost
+    @max_goals = max_goals
   end
 
   def team_info(id)
@@ -95,20 +97,20 @@ class StatTracker
     def most_goals_scored(id)
       goals = []
       games = @game_rows.select{ |col| col[4] == "#{id}" || col[5] == "#{id}"}
-      games.map do |row|
+      @max_goals = games.map do |row|
         if row[4] == "#{id}"
           goals << row[6]
         elsif row[5] == "#{id}"
           goals << row[7]
           end
-        end.flatten.sort.max.to_i
+        end.flatten.sort
+        max_goals.max.to_i
     end
 
     def fewest_goals_scored(id)
-
+      self.most_goals_scored(id)
+      @max_goals[1].to_i
     end
-
-
 
 end
 
@@ -122,4 +124,4 @@ end
 #   game_teams: game_teams_path
 # }
 # stat_tracker = StatTracker.from_csv(locations)
-# p stat_tracker.most_goals_scored(18)
+# p stat_tracker.fewest_goals_scored(18)
