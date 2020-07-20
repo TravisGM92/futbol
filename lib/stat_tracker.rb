@@ -112,6 +112,10 @@ class StatTracker
       @max_goals[1].to_i
     end
 
+    def favorite_opponent(id)
+
+    end
+
 end
 
 # game_path = './data/games.csv'
