@@ -91,20 +91,4 @@ class StatTracker
          |w,l| w.to_f/(w.to_f+l.to_f)end.sum/(@all_seasons_results1.zip(@all_seasons_results2).map do
             |w,l| w.to_f/(w.to_f+l.to_f)end.length)).round(2)
     end
-
 end
-
-# it "#average_win_percentage" do
-#     expect(@stat_tracker.average_win_percentage("6")).to eq 0.49
-
-# game_path = './data/games.csv'
-# team_path = './data/teams.csv'
-# game_teams_path = './data/game_teams.csv'
-#
-# locations = {
-#   games: game_path,
-#   teams: team_path,
-#   game_teams: game_teams_path
-# }
-# stat_tracker = StatTracker.from_csv(locations)
-# stat_tracker.average_win_percentage(6)

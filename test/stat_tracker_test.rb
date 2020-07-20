@@ -232,7 +232,21 @@ class StatTrackerTest < MiniTest::Test
     stat_tracker = StatTracker.from_csv(locations)
 
     assert_equal 0.49, stat_tracker.average_win_percentage(6)
+  end
 
+  def test_it_can_display_highest_goals
+    game_path = './data/games.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams.csv'
+
+    locations = {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+
+    assert_equal 7, stat_tracker.most_goals_scored(18)
   end
 
 end
