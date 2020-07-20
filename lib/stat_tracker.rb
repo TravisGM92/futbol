@@ -101,7 +101,7 @@ class StatTracker
         elsif row[5] == "#{id}"
           goals << row[7]
           end
-        end.flatten.sort.max
+        end.flatten.sort.max.to_i
     end
 
 end
