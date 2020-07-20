@@ -134,4 +134,7 @@ class StatTracker
       team_id = all_games.min_by { |v| freq[v] }
       @body1.select{ |rows| rows[0] == team_id}.flatten[2]
     end
-end
+
+    def rival(id)
+    end
+  end
