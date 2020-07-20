@@ -8,7 +8,8 @@ class StatTracker
               :all_seasons_results2,
               :all_seasons_results1,
               :games_won, :games_lost,
-              :max_goals
+              :max_goals, :games_won_games,
+              :body1
 
   def self.from_csv(data)
     StatTracker.new(data)
@@ -22,11 +23,14 @@ class StatTracker
       col[1]
     end.uniq.sort!
     @body = File.read(@data[:teams])
+    @body1 = CSV.parse(File.read(@data[:teams]), headers: false)
+
     @all_seasons_results2 = all_seasons_results2
     @all_seasons_results1 = all_seasons_results1
     @games_won = games_won
     @games_lost = games_lost
     @max_goals = max_goals
+    @games_won_games = games_won_games
   end
 
   def team_info(id)
@@ -40,13 +44,13 @@ class StatTracker
 
   def best_season(id)
     @games_won = self.games_played(id).select{ |row| row[3] == "WIN"}.map{ |row| row[0]}
-    games_won_games = @games_won.map{ |games| @game_rows.select{ |row| row[0] == games}}.map{ |game| game.flatten}
-    @all_seasons_results1 = [games_won_games.select{ |row| row[1] == "20122013"}.length,
-    games_won_games.select{ |row| row[1] == "20132014"}.length,
-    games_won_games.select{ |row| row[1] == "20142015"}.length,
-    games_won_games.select{ |row| row[1] == "20152016"}.length,
-     games_won_games.select{ |row| row[1] == "20162017"}.length,
-     games_won_games.select{ |row| row[1] == "20172018"}.length]
+    @games_won_games = @games_won.map{ |games| @game_rows.select{ |row| row[0] == games}}.map{ |game| game.flatten}
+    @all_seasons_results1 = [@games_won_games.select{ |row| row[1] == "20122013"}.length,
+    @games_won_games.select{ |row| row[1] == "20132014"}.length,
+    @games_won_games.select{ |row| row[1] == "20142015"}.length,
+    @games_won_games.select{ |row| row[1] == "20152016"}.length,
+     @games_won_games.select{ |row| row[1] == "20162017"}.length,
+     @games_won_games.select{ |row| row[1] == "20172018"}.length]
       if all_seasons_results1[0] == all_seasons_results1.sort[-1]
         "20122013"
       elsif all_seasons_results1[1] == all_seasons_results1.sort[-1]
@@ -113,19 +117,20 @@ class StatTracker
     end
 
     def favorite_opponent(id)
-
+      all_games = @game_rows.map do |rows|
+        index = rows.find_index("#{id}")
+        if index == 4
+          if rows[7] > rows[6]
+            rows[5]
+          end
+        elsif index == 5
+          if rows[6] == rows[7]
+            rows[4]
+          end
+        end
+      end.compact
+      freq = all_games.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+      team_id = all_games.min_by { |v| freq[v] }
+      @body1.select{ |rows| rows[0] == team_id}.flatten[2]
     end
-
-end
-
-# game_path = './data/games.csv'
-# team_path = './data/teams.csv'
-# game_teams_path = './data/game_teams.csv'
-#
-# locations = {
-#   games: game_path,
-#   teams: team_path,
-#   game_teams: game_teams_path
-# }
-# stat_tracker = StatTracker.from_csv(locations)
-# p stat_tracker.fewest_goals_scored(18)
+  end
