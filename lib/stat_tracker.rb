@@ -136,5 +136,20 @@ class StatTracker
     end
 
     def rival(id)
+      @all_games = @game_rows.map do |rows|
+        index = rows.find_index("#{id}")
+        if index == 4
+          if rows[6] > rows[7]
+            rows[5]
+          end
+        elsif index == 5
+          if rows[6] < rows[7]
+            rows[4]
+          end
+        end
+      end.compact.sort
+      freq = all_games.inject(Hash.new(0)) { |h,v| h[v] += 1; h }
+      team_id = all_games.min_by { |v| freq[v] }
+      @body1.select{ |rows| rows[0] == team_id}.flatten[2]
     end
   end

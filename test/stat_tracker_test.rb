@@ -308,7 +308,8 @@ class StatTrackerTest < MiniTest::Test
     }
     stat_tracker = StatTracker.from_csv(locations)
 
-    assert_equal "Huston Dash", stat_tracker.rival(18)
+    assert_equal "Houston Dash", stat_tracker.rival(18)
+  end
 
 
 
