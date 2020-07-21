@@ -3,10 +3,10 @@ require './lib/season'
 
 class StatTracker < Season
 
-  attr_reader :data, :seasons, :game_team_rows,
-              :game_rows, :body, :all_seasons_results2,
+  attr_reader :data, :seasons, :game_team_rows, :body,
+              :game_rows, :all_seasons_results2, :body1,
               :all_seasons_results1, :games_won, :games_lost,
-              :max_goals, :games_won_games, :body1, :all_games
+              :max_goals, :games_won_games, :all_games
 
   def self.from_csv(data)
     StatTracker.new(data)
