@@ -2,7 +2,7 @@ require "./test/test_helper.rb"
 class StatTrackerTest < MiniTest::Test
 
   def test_it_exists
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -19,7 +19,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_team_name_with_team_ID
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -36,7 +36,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_best_season_for_team_3
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -53,7 +53,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_best_season_20132014
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -70,7 +70,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_best_season_20152016
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -87,7 +87,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_best_season_20162017
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -104,7 +104,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_best_season_20122013
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -121,7 +121,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_best_season_20172018
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -138,7 +138,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_worst_season_20142015
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -154,7 +154,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_worst_season_20122013
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -170,7 +170,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_worst_season_20132014
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -186,7 +186,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_worst_season_20152016
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -202,7 +202,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_worst_season_20162017
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -218,7 +218,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_worst_season_20172018
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -234,7 +234,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_calculate_win_percentage
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -250,7 +250,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_highest_goals
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
@@ -266,7 +266,7 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_lowest_goals
-    skip
+    # skip
     game_path = './data/games.csv'
     team_path = './data/teams.csv'
     game_teams_path = './data/game_teams.csv'
