@@ -7,9 +7,6 @@ class Team
               :abbreviation,
               :stadium,
               :link
-  def self.from_csv(data)
-    Team.new(data)
-  end
 
   def initialize(data)
     @team_id = data[0]
@@ -18,6 +15,6 @@ class Team
     @abbreviation = data[3]
     @stadium = data[4]
     @link = data[5]
-  end
 
+  end
 end

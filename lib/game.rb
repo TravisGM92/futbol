@@ -1,4 +1,5 @@
 class Game
+  
   attr_reader :game_id,
               :season,
               :type,
@@ -9,10 +10,6 @@ class Game
               :home_goals,
               :venue,
               :venue_link
-
-  def self.from_csv(data)
-    Game.new(data)
-  end
 
   def initialize(data)
     @game_id = data[0]
@@ -26,4 +23,5 @@ class Game
     @venue = data[8]
     @venue_link = data[9]
   end
+
 end

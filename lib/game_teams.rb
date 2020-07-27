@@ -16,10 +16,6 @@ class GameTeam
               :giveaways,
               :takeaways
 
-  def self.from_csv(data)
-    GameTeam.new(data)
-  end
-
   def initialize(data)
     @game_id = data[0]
     @team_id = data[1]
@@ -38,4 +34,7 @@ class GameTeam
     @takeaways = data[14]
   end
 
+  def team_name
+    TeamManager.find_by_id(@team_id)
+  end
 end
