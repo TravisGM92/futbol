@@ -172,16 +172,15 @@ class GameManager
    }
      teams1
      games_won_against = teams1.inject(Hash.new(0)){ |h,v| h[v] += 1; h}
-     hash1 = games_won_against.merge(games_played_against){
-     |k, a_value, b_value| a_value .to_f / b_value.to_f}
+     hash1 = games_won_against.merge(games_played_against){ |k, a_value, b_value|
+       a_value .to_f / b_value.to_f}
      hash1.delete("14")
      team_final = hash1.max_by{|k,v| v}[0]
  end
 
  def games_by_season(season)
    @games_array.select{ |game|
-    game.season == season
-    }.map{ |game| game.game_id}
+    game.season == season}.map{ |game| game.game_id}
   end
 
 end

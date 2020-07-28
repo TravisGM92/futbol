@@ -118,84 +118,67 @@ class GameTeamsManager
 
   def worst_coach(all_games)
     array = []
-    game_teams_array.each do |game|
+    game_teams_array.each{ |game|
       if all_games.include?(game.game_id)
         array << game
       end
-    end
-    hash = array.group_by do |game| game.head_coach
-    end
-    games_played = hash.each do |k,v| hash[k] = v.length
-    end
+    }
+    hash = array.group_by{ |game| game.head_coach}
+    games_played = hash.each{ |k,v| hash[k] = v.length}
     array
-    games_lost = array.select do |game|
-      game.result == "LOSS" || game.result == "TIE"
-    end
-    games_lost_hash = games_lost.group_by do |game|
-      game.head_coach
-    end
-    numb_games_lost = games_lost_hash.each do |k,v|
-      games_lost_hash[k] = v.length
-    end
+    games_lost = array.select{ |game| game.result == "LOSS" || game.result == "TIE"}
+    games_lost_hash = games_lost.group_by{ |game| game.head_coach}
+    numb_games_lost = games_lost_hash.each{ |k,v| games_lost_hash[k] = v.length}
     numbers = []
     @result = {}
-    numb_games_lost.each do |k,v| games_played.each do |k1,v1|
+    numb_games_lost.each{ |k,v| games_played.each{ |k1,v1|
       if k == k1
         @result[k] = (v.to_f/v1.to_f).round(4)
       end
-    end
-  end
-  @result.sort_by do |key, value| value
-  end[-1].first
+    }
+  }
+  @result.sort_by{ |key, value| value}[-1].first
 end
 
   def most_accurate_team(all_games)
     array = []
-    game_teams_array.each do |game|
+    game_teams_array.each{ |game|
       if all_games.include?(game.game_id)
         array << game
       end
-    end
-    hash = array.group_by do |game|
-      game.team_id
-    end
-    hash1 = array.group_by do |game|
-      game.team_id
-    end
-    @all_goals = hash1.each do |k,v| hash1[k] = v.map do |game|
+    }
+    hash = array.group_by{ |game| game.team_id}
+    hash1 = array.group_by{ |game| game.team_id}
+    @all_goals = hash1.each{ |k,v| hash1[k] = v.map{ |game|
       game.goals.to_i
-    end.sum
-  end
-  all_shots = hash.each do |k,v| hash[k] = v.map do |game|
+    }.sum
+  }
+  all_shots = hash.each{ |k,v| hash[k] = v.map{ |game|
     game.shots.to_i
-  end.sum
-  end
-    all_shots.each do |k,v| @all_goals.each do |k1,v1|
+  }.sum
+}
+    all_shots.each{ |k,v| @all_goals.each{ |k1,v1|
       if k == k1
       @all_goals[k] = (v1.to_f/v.to_f)
       end
-    end
+    }
     @all_goals
-    end
-    @all_goals.sort_by do |key, value| value
-    end
+  }
+    @all_goals.sort_by{ |key, value| value}
   end
 
   def most_tackles(all_games)
     array = []
-    game_teams_array.each do |game|
+    game_teams_array.each{ |game|
       if all_games.include?(game.game_id)
         array << game
       end
-    end
-    hash = array.group_by do |game|
-      game.team_id
-    end
-    @all_tackles = hash.each do |k,v| hash[k] = v.map do |game|
+    }
+    hash = array.group_by{ |game| game.team_id}
+    @all_tackles = hash.each{ |k,v| hash[k] = v.map{ |game|
         game.tackles.to_i
-      end.sum
-    end
-    @all_tackles.sort_by do |key, value| value
-    end
+      }.sum
+    }
+    @all_tackles.sort_by{ |key, value| value}
   end
 end
