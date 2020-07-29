@@ -3,13 +3,9 @@ require_relative '../lib/game_manager'
 require_relative '../lib/team_manager'
 require_relative '../lib/game_teams_manager'
 require_relative '../lib/modable'
-require_relative '../lib/season_stats'
-require_relative '../lib/stat_tracker_helper'
-
-
 
 class StatTracker
-  include Modable, SeasonStats, StatTrackerHelper
+  include Modable
 
   attr_reader :game_manager, :game_teams_manager, :team_manager
   def self.from_csv(data)
@@ -24,7 +20,6 @@ class StatTracker
     @game_manager = GameManager.new(game_path)
     @team_manager = TeamManager.new(team_path)
   end
-
 
   def highest_total_score #game_manager -> highest_total_score method
     @game_manager.highest_total_score
@@ -143,7 +138,22 @@ class StatTracker
     @all_games = @game_manager.games_by_season(season)
     self.most_tackles1(season)
   end
+  
+  def least_accurate_team(season)
+    all_games = @game_manager.games_by_season(season)
+    team = @game_teams_manager.most_accurate_team(all_games)[0].first
+    @team_manager.find_by_id(team).team_name
+  end
+
+  def most_tackles(season)
+    all_games = @game_manager.games_by_season(season)
+    team = @game_teams_manager.most_tackles(all_games)[-1].first
+    @team_manager.find_by_id(team).team_name
+  end
 
   def fewest_tackles(season) #game_manager -> fewest_tackles
+    all_games = @game_manager.games_by_season(season)
+    team = @game_teams_manager.most_tackles(all_games)[0].first
+    @team_manager.find_by_id(team).team_name
   end
 end
