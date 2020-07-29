@@ -3,7 +3,6 @@ require_relative '../lib/game_teams'
 class GameTeamsManager
 
   attr_reader :game_teams_array
-
   def initialize(game_teams_path)
     @game_teams_array = []
 
