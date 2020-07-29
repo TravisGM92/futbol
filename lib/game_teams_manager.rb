@@ -12,21 +12,30 @@ class GameTeamsManager
     end
   end
 
-  def team_average_goals(team_id)
-    teams_by_id = @game_teams_array.find_all do |gameteam|
-      gameteam.team_id == team_id
+  def assign_goals_by_team
+    team_goals = Hash.new { |hash, key| hash[key] = [] }
+    @game_teams_array.each do |gameteam|
+      team_goals[gameteam.team_id] = []
     end
-
-    total_goals = teams_by_id.sum do |team|
-      team.goals.to_i
+    @game_teams_array.each do |gameteam|
+      team_goals[gameteam.team_id] << gameteam.goals.to_i
     end
-    (total_goals.to_f / teams_by_id.size).round(2)
+    team_goals
+  end
+  
+  def average_goals_by_team
+    team_goals = assign_goals_by_team
+    team_goals.keys.each{|team|
+      team_goals[team] = (team_goals[team].sum.to_f/(team_goals[team].size)).round(2)}
+      team_goals
   end
 
-  def teams_sort_by_average_goal
-    average = @game_teams_array.sort_by do |team|
-      team_average_goals(team.team_id)
-    end
+  def teams_max_by_average_goal
+    average_goals_by_team.max_by {|k,v| v}.first
+  end
+
+  def teams_min_by_average_goal
+    average_goals_by_team.min_by{|k,v| v}.first
   end
 
   def home_game_results
@@ -45,7 +54,7 @@ class GameTeamsManager
     results[:ties] = tie_games
     results
   end
-  
+
   def find_all_away_games
     @game_teams_array.find_all do |gameteam|
       gameteam.hoa == "away"
