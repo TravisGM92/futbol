@@ -4,7 +4,6 @@ require_relative '../lib/team_manager'
 require_relative '../lib/game_teams_manager'
 require_relative '../lib/modable'
 
-
 class StatTracker
   include Modable
 
@@ -24,8 +23,7 @@ class StatTracker
     @team_manager = TeamManager.new(team_path)
   end
 
-
-  def highest_total_score
+  def highest_total_score #game_manager -> highest_total_score method
     @game_manager.highest_total_score
   end
 
@@ -178,11 +176,21 @@ class StatTracker
     self.most_accurate_team2(season)
   end
 
-  def fewest_tackles(season)
-    @all_games = @game_manager.games_by_season(season)
-    self.most_tackles1(season)
-    @numb2 = @all_tackles.sort_by do |key, value| value
-    end[0].first
-    self.most_accurate_team2(season)
+  def least_accurate_team(season)
+    all_games = @game_manager.games_by_season(season)
+    team = @game_teams_manager.most_accurate_team(all_games)[0].first
+    @team_manager.find_by_id(team).team_name
+  end
+
+  def most_tackles(season)
+    all_games = @game_manager.games_by_season(season)
+    team = @game_teams_manager.most_tackles(all_games)[-1].first
+    @team_manager.find_by_id(team).team_name
+  end
+
+  def fewest_tackles(season) #game_manager -> fewest_tackles
+    all_games = @game_manager.games_by_season(season)
+    team = @game_teams_manager.most_tackles(all_games)[0].first
+    @team_manager.find_by_id(team).team_name
   end
 end

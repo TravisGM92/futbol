@@ -18,8 +18,13 @@ end
       @teams_array.find do |team|
         team.team_id == team_id
    end
+<<<<<<< HEAD
   end 
     
+=======
+  end
+
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
   def team_info(id)
     hash = {}
     team = @teams_array.select do |team| team.team_id == "#{id}"

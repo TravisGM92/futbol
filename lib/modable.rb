@@ -1,5 +1,6 @@
 module Modable
 
+<<<<<<< HEAD
   def fav_opp(id)
     freq = @teams1.inject(Hash.new(0)) do |h,v| h[v] += 1; h
     end
@@ -78,6 +79,9 @@ module Modable
   end
 
   def winningest_coach1(season)
+=======
+  def winningest_coach_mod(season)
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
     array = []
     @game_teams_manager.game_teams_array.each do |game|
       if @all_games.include?(game.game_id)
@@ -88,6 +92,7 @@ module Modable
     end
     games_played = hash.each do |k,v| hash[k] = v.length
     end
+<<<<<<< HEAD
 
     games_won = array.select do |game| game.result == "WIN"
     end
@@ -129,11 +134,24 @@ module Modable
     numbers = []
     @result = {}
     numb_games_lost.each do |k,v| games_played.each do |k1,v1|
+=======
+
+    games_won = array.select do |game| game.result == "WIN"
+    end
+    games_won_hash = games_won.group_by do |game| game.head_coach
+    end
+    numb_games_won = games_won_hash.each do |k,v| games_won_hash[k] = v.length
+    end
+    numbers = []
+    @result = {}
+    numb_games_won.each do |k,v| games_played.each do |k1,v1|
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
        if k == k1
           @result[k] = (v.to_f/v1.to_f).round(4)
        end
      end
    end
+<<<<<<< HEAD
   end
 
   def most_accurate_team1(season)
@@ -189,4 +207,8 @@ end
         end.sum
       end
     end
+=======
+   @result.max_by(&:last).first
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
   end
+end
