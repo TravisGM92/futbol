@@ -99,11 +99,78 @@ class GameTeamsManager
     (home_game_results[:wins].count.to_f/find_all_home_games.count.to_f).round(2)
   end
 
+
   def percentage_visitor_wins
     (home_game_results[:losses].count.to_f/find_all_home_games.count.to_f).round(2)
   end
 
   def percentage_ties
     (home_game_results[:ties].count.to_f/find_all_home_games.count.to_f).round(2)
+  end
+
+  def worst_coach(all_games)
+    array = []
+    game_teams_array.each{ |game|
+      if all_games.include?(game.game_id)
+        array << game
+      end
+    }
+    hash = array.group_by{ |game| game.head_coach}
+    games_played = hash.each{ |k,v| hash[k] = v.length}
+    array
+    games_lost = array.select{ |game| game.result == "LOSS" || game.result == "TIE"}
+    games_lost_hash = games_lost.group_by{ |game| game.head_coach}
+    numb_games_lost = games_lost_hash.each{ |k,v| games_lost_hash[k] = v.length}
+    numbers = []
+    @result = {}
+    numb_games_lost.each{ |k,v| games_played.each{ |k1,v1|
+      if k == k1
+        @result[k] = (v.to_f/v1.to_f).round(4)
+      end
+    }
+  }
+  @result.sort_by{ |key, value| value}[-1].first
+end
+
+  def most_accurate_team(all_games)
+    array = []
+    game_teams_array.each{ |game|
+      if all_games.include?(game.game_id)
+        array << game
+      end
+    }
+    hash = array.group_by{ |game| game.team_id}
+    hash1 = array.group_by{ |game| game.team_id}
+    @all_goals = hash1.each{ |k,v| hash1[k] = v.map{ |game|
+      game.goals.to_i
+    }.sum
+  }
+  all_shots = hash.each{ |k,v| hash[k] = v.map{ |game|
+    game.shots.to_i
+  }.sum
+}
+    all_shots.each{ |k,v| @all_goals.each{ |k1,v1|
+      if k == k1
+      @all_goals[k] = (v1.to_f/v.to_f)
+      end
+    }
+    @all_goals
+  }
+    @all_goals.sort_by{ |key, value| value}
+  end
+
+  def most_tackles(all_games)
+    array = []
+    game_teams_array.each{ |game|
+      if all_games.include?(game.game_id)
+        array << game
+      end
+    }
+    hash = array.group_by{ |game| game.team_id}
+    @all_tackles = hash.each{ |k,v| hash[k] = v.map{ |game|
+        game.tackles.to_i
+      }.sum
+    }
+    @all_tackles.sort_by{ |key, value| value}
   end
 end
