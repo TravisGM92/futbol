@@ -53,7 +53,6 @@ module Modable
     end
   end
 
-
   def goals(id)
     @away = @all_games.map do |rows|
       rows.away_goals
