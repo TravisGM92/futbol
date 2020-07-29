@@ -99,6 +99,7 @@ class GameTeamsManager
     (home_game_results[:wins].count.to_f/find_all_home_games.count.to_f).round(2)
   end
 
+
   def percentage_visitor_wins
     (home_game_results[:losses].count.to_f/find_all_home_games.count.to_f).round(2)
   end
