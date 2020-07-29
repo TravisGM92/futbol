@@ -1,7 +1,7 @@
 require 'CSV'
 
 class Game
-  
+
   attr_reader :game_id,
               :season,
               :type,
@@ -20,8 +20,8 @@ class Game
     @date_time = data[3]
     @away_team_id = data[4]
     @home_team_id = data[5]
-    @away_goals = data[6]
-    @home_goals = data[7]
+    @away_goals = data[6].to_i
+    @home_goals = data[7].to_i
     @venue = data[8]
     @venue_link = data[9]
   end
