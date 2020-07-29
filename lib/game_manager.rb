@@ -68,7 +68,7 @@ class GameManager
   end
 
   def average_goals_by_season
-    season_goals = @game_manager.collect_goals_by_season
+    season_goals = collect_goals_by_season
     season_goals.keys.each do |season|
       season_goals[season] = (season_goals[season].sum.to_f/(season_goals[season].size)*2).round(2)
     }
