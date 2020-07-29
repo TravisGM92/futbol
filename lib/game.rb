@@ -25,5 +25,4 @@ class Game
     @venue = data[8]
     @venue_link = data[9]
   end
-
 end

@@ -45,8 +45,7 @@ class GameTeamsManager
     results[:ties] = tie_games
     results
   end
-
-
+  
   def find_all_away_games
     @game_teams_array.find_all do |gameteam|
       gameteam.hoa == "away"

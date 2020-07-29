@@ -9,7 +9,6 @@ class GameManager
     CSV.foreach(game_path, headers: true) do |row|
       @games_array << Game.new(row)
     end
-
   end
 
   def collect_goals_by_game
@@ -50,8 +49,8 @@ class GameManager
     total_goals
   end
 
-    def average_goals_per_game
-      total_goals = collect_all_goals
+  def average_goals_per_game
+    total_goals = collect_all_goals
     (total_goals.sum.to_f/(total_goals.size/2)).round(2)
   end
 
@@ -144,65 +143,65 @@ class GameManager
   end
 
   def favorite_opponent(id)
-   self.best_season(id)
-   teams = []
-   @all_games.select do |rows|
-     if rows.home_team_id == "#{id}"
-       if rows.away_goals > rows.home_goals
-         teams << rows.away_team_id
-       end
-     elsif rows.away_team_id == "#{id}"
-       if rows.away_goals == rows.home_goals
-         teams << rows.home_team_id
-       end
-     end
-   end
-   freq = teams.inject(Hash.new(0)) do |h,v| h[v] += 1; h
-   end
-   @numbs = teams.min_by do |v| freq[v]
-   end
- end
+    self.best_season(id)
+    teams = []
+    @all_games.select do |rows|
+      if rows.home_team_id == "#{id}"
+        if rows.away_goals > rows.home_goals
+          teams << rows.away_team_id
+        end
+      elsif rows.away_team_id == "#{id}"
+        if rows.away_goals == rows.home_goals
+          teams << rows.home_team_id
+        end
+      end
+    end
+    freq = teams.inject(Hash.new(0)) do |h,v| h[v] += 1; h
+    end
+    @numbs = teams.min_by do |v| freq[v]
+    end
+  end
 
- def rival(id)
-   teams = []
-   self.best_season(id)
-   @all_games.each do |game|
-     if game.away_team_id == "#{id}"
-       teams << game.home_team_id
-     elsif game.home_team_id == "#{id}"
-       teams << game.away_team_id
-     end
-   end
-   teams
-   games_played_against = teams.inject(Hash.new(0)) do |h,v| h[v] += 1; h
-   end
-   teams1 = []
-   @all_games.each do |game|
-     if game.away_team_id == "#{id}"
-       if game.away_goals < game.home_goals
-         teams1 << game.home_team_id
-       end
-     elsif game.home_team_id == "#{id}"
-       if game.away_goals > game.home_goals
-         teams1 << game.away_team_id
-       end
-     end
-   end
-     teams1
-     games_won_against = teams1.inject(Hash.new(0)) do |h,v| h[v] += 1; h
-     end
-     hash1 = games_won_against.merge(games_played_against)do
-     |k, a_value, b_value| a_value .to_f / b_value.to_f
-   end
-     hash1.delete("14")
-     team_final = hash1.max_by{|k,v| v}[0]
- end
+  def rival(id)
+    teams = []
+    self.best_season(id)
+    @all_games.each do |game|
+      if game.away_team_id == "#{id}"
+        teams << game.home_team_id
+      elsif game.home_team_id == "#{id}"
+        teams << game.away_team_id
+      end
+    end
+    teams
+    games_played_against = teams.inject(Hash.new(0)) do |h,v| h[v] += 1; h
+    end
+    teams1 = []
+    @all_games.each do |game|
+      if game.away_team_id == "#{id}"
+        if game.away_goals < game.home_goals
+          teams1 << game.home_team_id
+        end
+      elsif game.home_team_id == "#{id}"
+        if game.away_goals > game.home_goals
+          teams1 << game.away_team_id
+        end
+      end
+    end
+    teams1
+    games_won_against = teams1.inject(Hash.new(0)) do |h,v| h[v] += 1; h
+    end
+    hash1 = games_won_against.merge(games_played_against)do
+    |k, a_value, b_value| a_value .to_f / b_value.to_f
+  end
+  hash1.delete("14")
+  team_final = hash1.max_by{|k,v| v}[0]
+end
 
- def games_by_season(season)
-   @games_array.select do |game|
+def games_by_season(season)
+  @games_array.select do |game|
     game.season == season
   end.map do |game| game.game_id
-      end
- end
+  end
+end
 
 end
