@@ -18,11 +18,19 @@ class StatTrackerTest < MiniTest::Test
     @stat_tracker = StatTracker.from_csv(@locations)
   end
 
+<<<<<<< HEAD
+  def test_highest_scores
+    assert_equal 11, @stat_tracker.highest_total_score
+  end
+
+  def test_lowest_scores
+=======
   def test_highest_total_score
     assert_equal 11, @stat_tracker.highest_total_score
   end
 
   def test_lowest_total_score
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
     assert_equal 0, @stat_tracker.lowest_total_score
   end
 
@@ -68,23 +76,35 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_count_teams
+<<<<<<< HEAD
+=======
     skip
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
     assert_equal 32, @stat_tracker.count_of_teams
   end
 
   def test_it_can_best_offense_team
+<<<<<<< HEAD
+=======
     skip
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
     assert_equal "Reign FC", @stat_tracker.best_offense
   end
 
 
   def test_it_can_worst_offense_team
+<<<<<<< HEAD
+=======
     skip
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
     assert_equal "Utah Royals FC", @stat_tracker.worst_offense
   end
 
   def test_it_can_get_highest_scoring_vistor_team
+<<<<<<< HEAD
+=======
     skip
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
     assert_equal "FC Dallas", @stat_tracker.highest_visitor_team
   end
 
@@ -115,6 +135,22 @@ class StatTrackerTest < MiniTest::Test
     assert_equal expected, @stat_tracker.team_info(18)
   end
 
+<<<<<<< HEAD
+  def test_count_of_games_by_season
+    expected = {
+      "20122013"=>806,
+      "20162017"=>1317,
+      "20142015"=>1319,
+      "20152016"=>1321,
+      "20132014"=>1323,
+      "20172018"=>1355
+    }
+    assert_equal expected, @stat_tracker.count_of_games_by_season
+  end
+
+
+=======
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
   def test_it_can_display_best_season
     skip
     assert_equal "20132014", @stat_tracker.best_season(6)
@@ -126,7 +162,10 @@ class StatTrackerTest < MiniTest::Test
   end
 
   def test_it_can_display_average_win_percentage
+<<<<<<< HEAD
+=======
     skip
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
     assert_equal 0.49, @stat_tracker.average_win_percentage(6)
   end
 
@@ -150,12 +189,15 @@ class StatTrackerTest < MiniTest::Test
     assert_equal "LA Galaxy", @stat_tracker.rival(18)
   end
 
+<<<<<<< HEAD
+=======
   def test_it_can_get_lowest_scoring_home_team
     skip
     assert_equal "Utah Royals FC", @stat_tracker.lowest_home_team
   end
 
 
+>>>>>>> 42c7e177a41c764a783acb641c35edc5b3051b62
   def test_it_can_display_winningest_coach
 skip
     assert_equal "Claude Julien", @stat_tracker.winningest_coach("20132014")
