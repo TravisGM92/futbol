@@ -95,29 +95,35 @@ class StatTracker
   def count_of_teams
     @team_manager.size
   end
-  
-  ef best_offense
+
+  def best_offense
    team_number = @game_teams_manager.teams_max_by_average_goal
    @team_manager.find_by_id(team_number).team_name
   end
-
+  
   def worst_offense
     team_number = @game_teams_manager.teams_min_by_average_goal
     @team_manager.find_by_id(team_number).team_name
   end
-  
-  def highest_visitor_team
+
+  def highest_scoring_visitor
     team = @game_teams_manager.highest_visitor_team.first
     @team_manager.find_by_id(team).team_name
   end
-  
-  def lowest_visitor_team
+
+  def lowest_scoring_visitor
     team = @game_teams_manager.lowest_visitor_team.first
     @team_manager.find_by_id(team).team_name
   end
-  
-  def lowest_home_team
-    @game_teams_array.lowest_home_team
+
+  def highest_scoring_home_team
+    team = @game_teams_manager.highest_home_team.first
+    @team_manager.find_by_id(team).team_name
+  end
+
+  def lowest_scoring_home_team
+    team = @game_teams_manager.lowest_home_team.first
+    @team_manager.find_by_id(team).team_name
   end
   #season stats start here (Drew's)
   def winningest_coach(season)
@@ -140,18 +146,7 @@ class StatTracker
     end[-1].first
     self.most_accurate_team2(season)
   end
-  
-  def highest_home_team
-    team = @game_teams_manager.highest_home_team.first
-    @team_manager.find_by_id(team).team_name
-  end
-  
-  def lowest_home_team
-    team = @game_teams_manager.lowest_home_team.first
-    @team_manager.find_by_id(team).team_name
-  end
-  
-  
+
   def least_accurate_team(season)
     @all_games2 = @game_manager.games_by_season(season)
     self.most_accurate_team1(season)
@@ -159,7 +154,7 @@ class StatTracker
     end[0].first
     self.most_accurate_team2(season)
   end
-  
+
   def most_tackles(season)
     @all_games = @game_manager.games_by_season(season)
     self.most_tackles1(season)
@@ -167,7 +162,7 @@ class StatTracker
     end[-1].first
     self.most_accurate_team2(season)
   end
-  
+
   def fewest_tackles(season)
     @all_games = @game_manager.games_by_season(season)
     self.most_tackles1(season)
